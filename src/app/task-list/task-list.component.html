@@ -1,0 +1,19 @@
+<h1>Lista de tareas</h1>
+
+<div>
+    <form #taskForm="ngForm" (ngSubmit)="addTask(); taskForm.reset()">
+        <div>
+            <input type="text" name="task" placeholder="Tarea" [(ngModel)]="taskModel.text" required>
+        </div>
+        <div>
+            <input type="submit" value="Crear tarea" [disabled]="!taskForm.form.valid">
+        </div>
+    </form>
+</div>
+
+<ul>
+    <li *ngFor="let task of tasks | async">
+        <input (change)="updateTask(task)" type="checkbox" [(ngModel)]="task.done">{{ task | json }}
+        <button (click)="deleteTask(task)">Borrar</button>
+    </li>
+</ul>
